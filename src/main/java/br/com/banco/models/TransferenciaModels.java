@@ -1,7 +1,8 @@
-package models;
+package br.com.banco.models;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,15 +13,15 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="transferencia")
-public class TransModels implements Serializable  {
+public class TransferenciaModels implements Serializable  {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private int id;
 	@Column(nullable = false)
-	private Date data_transferencia;
+	private LocalDate data_transferencia;
 	@Column(nullable = false)
 	private long valor;
 	@Column(nullable = false, length = 15)
@@ -29,16 +30,18 @@ public class TransModels implements Serializable  {
 	private String nome_operador_transacao;
 	@Column(nullable = false)
 	private long id_conta;
+	
+	
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getData_transferencia() {
+	public LocalDate getData_transferencia() {
 		return data_transferencia;
 	}
-	public void setData_transferencia(Date data_transferencia) {
+	public void setData_transferencia(LocalDate data_transferencia) {
 		this.data_transferencia = data_transferencia;
 	}
 	public long getValor() {
