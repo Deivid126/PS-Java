@@ -1,15 +1,9 @@
 package br.com.banco.models;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="transferencia")
@@ -28,10 +22,23 @@ public class TransferenciaModels implements Serializable  {
 	private String tipo;
 	@Column(nullable = true, length = 50)
 	private String nome_operador_transacao;
-	@Column(nullable = false)
-	private long id_conta;
-	
-	
+	@ManyToOne
+	@JoinColumn(name="id_conta")
+	private ContaModels id_conta;
+
+	public TransferenciaModels() {
+	}
+
+	public TransferenciaModels(int id, LocalDate data_transferencia, Long valor, String tipo, String nome_operador_transacao, ContaModels id_conta){
+		this.id = id;
+		this.data_transferencia = data_transferencia;
+		this.valor = valor;
+		this.tipo = tipo;
+		this.nome_operador_transacao = nome_operador_transacao;
+		this.id_conta = id_conta;
+	}
+
+
 	public long getId() {
 		return id;
 	}
@@ -62,10 +69,10 @@ public class TransferenciaModels implements Serializable  {
 	public void setNome_operador_transacao(String nome_operador_transacao) {
 		this.nome_operador_transacao = nome_operador_transacao;
 	}
-	public long getId_conta() {
+	public ContaModels getId_conta() {
 		return id_conta;
 	}
-	public void setId_conta(long id_conta) {
+	public void setId_conta(ContaModels id_conta) {
 		this.id_conta = id_conta;
 	}
 	

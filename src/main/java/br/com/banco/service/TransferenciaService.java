@@ -1,16 +1,12 @@
 package br.com.banco.service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
-
+import br.com.banco.exception.BusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import br.com.banco.models.TransferenciaModels;
 import br.com.banco.repositories.TransferenciaRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -31,24 +27,35 @@ public class TransferenciaService {
 	        return transferenciaRepository.findAll();
 	    }
 
-		public List<TransferenciaModels> findAllByName(String nome_operador_transacao){
-		return transferenciaRepository.findByName(nome_operador_transacao);
+		public List<TransferenciaModels> findAllByName(String nome) throws BusinessException {
+
+		List<TransferenciaModels> transferencias = transferenciaRepository.findByName(nome);
+
+		if(transferencias.isEmpty()) {
+			throw new BusinessException("Transferências não encontradas");
 		}
 
-		public List<TransferenciaModels> findAllByDate(LocalDate start, LocalDate end){
-		return transferenciaRepository.findBeteewDate(start,end);
+		return transferencias;
 		}
 
-		public List<TransferenciaModels> findAllNameandDate(LocalDate start, LocalDate end, String nome){
-			return  transferenciaRepository.findbyDateandName(start,end,nome);
+		public List<TransferenciaModels> findAllByDate(LocalDate start, LocalDate end) throws BusinessException {
+		List<TransferenciaModels> transferenciaByDate = transferenciaRepository.findBeteewDate(start,end);
+
+		if(transferenciaByDate.isEmpty()){
+			throw new BusinessException("Não existem transferências com esse intercalo de tempo");
 		}
-	    
-	    //public List<TransferenciaModels> findTransferenciasDateConta(Date TimeStart, Date TimeEnd, String nome){
-	    	
-	    	//List<TransferenciaModels> transferenciasdate = transferenciaRepository.findAllByPublicationTimeBetween(TimeStart, TimeEnd).;
-	    	
-	    	//List<TransferenciaModels> transferencia = transferenciasdate.
-	    	
-	    //}
+		return transferenciaByDate;
+		}
+
+		public List<TransferenciaModels> findAllNameandDate(LocalDate start, LocalDate end, String nome) throws BusinessException {
+
+			List<TransferenciaModels> transferencias = transferenciaRepository.findbyDateandName(start,end,nome);
+
+			if(transferencias.isEmpty()){
+				throw new BusinessException("Transferências não encontradas");
+			}
+			return  transferencias;
+		}
+
 	}
 
