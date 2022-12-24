@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import br.com.banco.models.TransferenciaModels;
 import br.com.banco.service.TransferenciaService;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/transferencia")
@@ -26,13 +28,6 @@ public class TransferenciaController {
 		this.transferenciaservice = transferenciaservice;
 	}
 
-
-	//@PostMapping
-   // public ResponseEntity<TransferenciaModels> salvartransferencia(){
-        
-
-        //return ResponseEntity.status(HttpStatus.CREATED).body(transferenciaservice.save(transferencia));
-   // }
 
 	
 	@GetMapping

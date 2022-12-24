@@ -1,5 +1,7 @@
 package br.com.banco.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -14,28 +16,29 @@ public class TransferenciaModels implements Serializable  {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(nullable = false)
+	@Column(nullable = false,name = "data_transferencia")
 	private LocalDate data_transferencia;
-	@Column(nullable = false)
+	@Column(nullable = false,name = "valor")
 	private long valor;
-	@Column(nullable = false, length = 15)
+	@Column(nullable = false, length = 15,name = "tipo")
 	private String tipo;
-	@Column(nullable = true, length = 50)
+	@Column(nullable = true, length = 50,name = "nome_operador_transacao")
 	private String nome_operador_transacao;
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="id_conta")
-	private ContaModels id_conta;
+	@JoinColumn(name="conta_id")
+	private ContaModels conta_id;
 
 	public TransferenciaModels() {
 	}
 
-	public TransferenciaModels(int id, LocalDate data_transferencia, Long valor, String tipo, String nome_operador_transacao, ContaModels id_conta){
+	public TransferenciaModels(int id, LocalDate data_transferencia, Long valor, String tipo, String nome_operador_transacao, ContaModels conta_id){
 		this.id = id;
 		this.data_transferencia = data_transferencia;
 		this.valor = valor;
 		this.tipo = tipo;
 		this.nome_operador_transacao = nome_operador_transacao;
-		this.id_conta = id_conta;
+		this.conta_id = conta_id;
 	}
 
 
@@ -70,10 +73,10 @@ public class TransferenciaModels implements Serializable  {
 		this.nome_operador_transacao = nome_operador_transacao;
 	}
 	public ContaModels getId_conta() {
-		return id_conta;
+		return conta_id;
 	}
 	public void setId_conta(ContaModels id_conta) {
-		this.id_conta = id_conta;
+		this.conta_id = conta_id;
 	}
 	
 	

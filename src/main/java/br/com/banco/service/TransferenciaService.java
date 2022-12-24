@@ -19,9 +19,9 @@ public class TransferenciaService {
 	}
 
 
-	public TransferenciaModels save(TransferenciaModels transferencia) {
-	    	return transferenciaRepository.save(transferencia);
-	    }
+
+
+
 	    
 	    public List<TransferenciaModels> findAll() {
 	        return transferenciaRepository.findAll();

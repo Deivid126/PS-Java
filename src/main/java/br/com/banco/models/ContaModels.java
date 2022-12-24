@@ -1,4 +1,6 @@
 package br.com.banco.models;
+import net.minidev.json.annotate.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +12,15 @@ public class ContaModels {
     private Long id_conta;
     private String nome_responsavel;
 
-    @OneToMany(mappedBy = "id_conta")
-    List<TransferenciaModels> transferencias = new ArrayList<>();
+
+
 
     public ContaModels() {}
 
 
-    public ContaModels(Long id_conta, String nome_responsavel, List<TransferenciaModels> transferencias){
+    public ContaModels(Long id_conta, String nome_responsavel){
         this.id_conta = id_conta;
         this.nome_responsavel = nome_responsavel;
-        this.transferencias = transferencias;
-
     }
 
     public String getNome_responsavel() {
@@ -39,11 +39,4 @@ public class ContaModels {
         this.id_conta = id_conta;
     }
 
-    public List<TransferenciaModels> getTransferencias() {
-        return transferencias;
-    }
-
-    public void setTransferencias(List<TransferenciaModels> transferencias) {
-        this.transferencias = transferencias;
-    }
 }
