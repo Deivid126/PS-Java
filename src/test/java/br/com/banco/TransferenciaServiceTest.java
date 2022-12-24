@@ -27,8 +27,6 @@ public class TransferenciaServiceTest {
     @InjectMocks
     TransferenciaService transferenciaService;
 
-    @Captor
-    ArgumentCaptor<TransferenciaModels> transferenciaCaptor;
 
     @Test
     public void GetbyNameTest() throws BusinessException {
